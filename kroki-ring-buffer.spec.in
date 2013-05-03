@@ -1,0 +1,52 @@
+%define fullname %{name}-@RPM_VERSION@-@RPM_RELEASE@
+
+Name:           @PACKAGE_TARNAME@
+Version:        @RPM_VERSION@
+Release:        @RPM_RELEASE@%{?dist}
+Summary:        Ring buffer for inter-process communication
+Group:          Development/Libraries
+License:        LGPLv3+
+Source:         %{fullname}.tar.bz2
+URL:            @PACKAGE_URL@
+BuildRequires:  kroki-error-devel
+
+%description
+@README@
+
+This package contains binary files.
+
+%prep
+%setup -q -n %{fullname}
+
+%build
+%configure
+make %{?_smp_mflags}
+
+%check
+make check
+
+%install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+%{_bindir}/*
+%{_libdir}/*
+
+
+%package devel
+Summary:        Ring buffer for inter-process communication headers
+Requires:       @PACKAGE_TARNAME@ == @RPM_VERSION@
+
+%description devel
+@README@
+
+This package contains development headers.
+
+%files devel
+%defattr(-,root,root,-)
+%{_includedir}/kroki/*
+
+
+%changelog

@@ -1,0 +1,4 @@
+Ring buffer for inter-process communication.
+
+
+Implementation requires Linux kernel, GCC 4.7.3+ and Glibc.
