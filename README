@@ -1,4 +1,5 @@
 Ring buffer for inter-process communication.
 
+For documentation see kroki/ring_buffer.h include file.
 
 Implementation requires Linux kernel, GCC 4.7.3+ and Glibc.
